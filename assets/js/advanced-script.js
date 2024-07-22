@@ -1,0 +1,1 @@
+console.log('Load Ok Advanced script file');
