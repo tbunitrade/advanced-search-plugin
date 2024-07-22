@@ -3,7 +3,7 @@
  * Plugin Name: Advanced Search
  * Description: Plugin for API Algolia, advanced search.
  * Author: OSONY
- * Version: 1.1
+ * Version: 1.2
  */
 
 

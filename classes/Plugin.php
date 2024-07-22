@@ -1,6 +1,7 @@
 <?php
 
 namespace AdvancedSearchPLugin;
+use Algolia\AlgoliaSearch\SearchClient;
 
 class Plugin
 {
@@ -27,6 +28,13 @@ class Plugin
         add_action( 'admin_menu', [$this->menu, 'register'] );
         add_action( 'wp_enqueue_scripts', array($this->assets_handler, 'MyScripts') );
         $this->loaded = true;
+    }
+
+    public function getAlgoliaClient()
+    {
+        $app_id = get_option('algolia_app_id', '');
+        $api_key = get_option('algolia_search_api_key', '');
+        return SearchClient::create($app_id, $api_key);
     }
 
 }
