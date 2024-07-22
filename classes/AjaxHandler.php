@@ -14,6 +14,11 @@ class AjaxHandler
             wp_die();
         }
 
+        if (!isset($_POST['advanced_search_nonce']) || !wp_verify_nonce($_POST['advanced_search_nonce'], 'advanced_search_nonce')) {
+            wp_send_json_error('Неверный nonce');
+            wp_die();
+        }
+
         $query = sanitize_text_field($_POST['query']);
         $algolia_app = new AlgoliaApp();
         $client = $algolia_app->getClient();

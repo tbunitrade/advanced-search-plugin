@@ -31,32 +31,15 @@ class Plugin
 
     public function render_search_form()
     {
+        $nonce = wp_create_nonce('advanced_search_nonce');
         ob_start();
         ?>
         <form id="advanced-search-form">
             <input type="text" name="query" placeholder="Введите поисковый запрос">
+            <input type="hidden" name="advanced_search_nonce" value="<?php echo esc_attr($nonce); ?>">
             <button type="submit">Поиск</button>
         </form>
         <div id="search-results"></div>
-        <script>
-            jQuery(document).ready(function($) {
-                $('#advanced-search-form').on('submit', function(e) {
-                    e.preventDefault();
-                    var query = $(this).find('input[name="query"]').val();
-                    $.ajax({
-                        url: '<?php echo admin_url('admin-ajax.php'); ?>',
-                        method: 'POST',
-                        data: {
-                            action: 'advanced_search',
-                            query: query,
-                        },
-                        success: function(response) {
-                            $('#search-results').html(response);
-                        }
-                    });
-                });
-            });
-        </script>
         <?php
         return ob_get_clean();
     }
