@@ -1,11 +1,8 @@
 <?php
 
 namespace AdvancedSearchPLugin;
-use Algolia\AlgoliaSearch\SearchClient;
-
 class Plugin
 {
-
     private $loaded;
     private $menu;
     private $assets_handler;
@@ -20,7 +17,6 @@ class Plugin
         $this->ajax_handler = new AjaxHandler();
         $this->algolia_app = new AlgoliaApp();
     }
-
 
     public function load()
     {
@@ -64,12 +60,4 @@ class Plugin
         <?php
         return ob_get_clean();
     }
-
-//    public function getAlgoliaClient()
-//    {
-//        $app_id = get_option('algolia_app_id', '');
-//        $api_key = get_option('algolia_search_api_key', '');
-//        return SearchClient::create($app_id, $api_key);
-//    }
-
 }

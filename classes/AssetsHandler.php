@@ -5,7 +5,6 @@ class AssetsHandler
 {
     public function MyScripts()
     {
-
         wp_enqueue_script('jquery');
 
         if( !wp_script_is('advanced-script.js','enqueued')){
@@ -15,3 +14,5 @@ class AssetsHandler
         }
     }
 }
+
+#here i do init of ajax and my custom js and css, I really do not use it for this step

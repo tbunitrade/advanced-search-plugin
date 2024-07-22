@@ -13,5 +13,6 @@ class Autoloader
         require_once ADVANCED_SEARCH_DIR . 'classes/Plugin.php';
         require_once ADVANCED_SEARCH_DIR . 'classes/AlgoliaApp.php';
     }
-
 }
+
+#this is my core file with my Class, this my custom pattern i call it strategy.

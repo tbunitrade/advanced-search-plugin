@@ -15,19 +15,14 @@ class AlgoliaApp
 
     protected function initialize_algolia()
     {
-        $app_id = get_option('algolia_app_id', '');
-        $api_key = get_option('algolia_search_api_key', '');
+        $app_id = get_option('algolia_app_id');
+        $api_key = get_option('algolia_search_api_key');
         $this->client = SearchClient::create($app_id, $api_key);
-
-        //$this->client = SearchClient::create('YourApplicationID', 'YourAdminAPIKey');
-        // Ваш код инициализации клиента Algolia
     }
-
     public function getClient()
     {
         return $this->client;
     }
-
     public function testConnection()
     {
         try {
@@ -45,3 +40,5 @@ class AlgoliaApp
         }
     }
 }
+
+#основа приложения, проверяет коннект и ловит ошибку  и разпознает ошибку
