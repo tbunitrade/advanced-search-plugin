@@ -35,19 +35,19 @@ class AdminMenu
         $this->position = $position;
 
         add_action('admin_init', [$this, 'register_settings']);
-        add_action('admin_menu', [$this, 'register_settings_page']);
+        add_action('admin_menu', [$this, 'register']);
     }
 
     public function render_test_connection_page() {
         $algolia_app = new AlgoliaApp();
-        $connection_status = $algolia_app->testConnection();
+        $connection_result = $algolia_app->testConnection();
         ?>
         <div class="wrap">
             <h1>Проверка соединения с Algolia</h1>
-            <?php if ($connection_status): ?>
-                <p style="color: green;">Соединение успешно установлено!</p>
+            <?php if ($connection_result['status']): ?>
+                <p style="color: green;"><?php echo esc_html($connection_result['message']); ?></p>
             <?php else: ?>
-                <p style="color: red;">Не удалось установить соединение. Проверьте ваши настройки.</p>
+                <p style="color: red;"><?php echo esc_html($connection_result['message']); ?></p>
             <?php endif; ?>
         </div>
         <?php
@@ -77,26 +77,6 @@ class AdminMenu
             $this->capability,
             'advanced-search-test-connection',
             [$this, 'render_test_connection_page']
-        );
-    }
-
-    public function register_settings_page() {
-        add_menu_page(
-            $this->page_title,
-            $this->menu_title,
-            $this->capability,
-            $this->slug,
-            [$this, $this->callback],
-            $this->dashicon,
-            $this->position
-        );
-        add_submenu_page(
-            $this->slug,
-            'Настройки',
-            'Настройки',
-            $this->capability,
-            'advanced-search-settings',
-            [$this, 'render_settings_page']
         );
     }
 

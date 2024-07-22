@@ -33,9 +33,15 @@ class AlgoliaApp
         try {
             $client = $this->getClient();
             $indexes = $client->listIndices();
-            return !empty($indexes);
+            return [
+                'status' => !empty($indexes),
+                'message' => !empty($indexes) ? 'Соединение успешно установлено!' : 'Не удалось получить индексы.'
+            ];
         } catch (\Exception $e) {
-            return false;
+            return [
+                'status' => false,
+                'message' => 'Ошибка: ' . $e->getMessage()
+            ];
         }
     }
 }
